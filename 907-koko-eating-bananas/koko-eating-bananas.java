@@ -7,18 +7,18 @@ class Solution {
 
         int left = 1;
         int right = max;
-        int k =0 ;
-        while(left <= right){
+        // int k =0 ;
+        while(left < right){
             int mid = left + (right-left)/2;
             if(calc(mid,piles) <= h){
-                k = mid;
-                right = mid - 1;
+                // k = mid;
+                right = mid ;
             }
             if(calc(mid,piles) > h){
                 left = mid + 1;
             }
         }
-        return k;
+        return left;
     }
 
     long calc(int k,int[] piles){
