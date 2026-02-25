@@ -35,10 +35,10 @@ class Solution {
 
         }
 
-        if(maxLen == 0 && target != 0){
+        if(maxLen == 0 && target != 0){ // ise ratt lo
             return -1;
         }
-            
+    
         int ops = n - maxLen;
         return ops;
     }
