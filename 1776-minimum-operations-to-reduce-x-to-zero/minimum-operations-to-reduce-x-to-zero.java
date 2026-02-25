@@ -18,10 +18,7 @@ class Solution {
         }
 
         int target = totSum - x;
-        if (target < 0) return -1;
-        if (target == 0) return n;
-
-        int maxLen = -1; // 
+        int maxLen = 0;
 
         HashMap<Integer,Integer> map = new HashMap<>(); // it will store prefixSum as key and indices as value 
         map.put(0,-1); // important
@@ -38,8 +35,10 @@ class Solution {
 
         }
 
-        if(maxLen == -1) return -1;
-
+        if(maxLen == 0 && target != 0){
+            return -1;
+        }
+            
         int ops = n - maxLen;
         return ops;
     }
