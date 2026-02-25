@@ -8,8 +8,7 @@ class Solution {
     // return n - maxLength (no. of operations)
 
     // concept
-    // prefix sum + mapping 
-
+    // Sliding Window
     public int minOperations(int[] nums, int x) {
         int n = nums.length;
         int totSum = 0;
@@ -18,28 +17,23 @@ class Solution {
         }
 
         int target = totSum - x;
-        int maxLen = 0;
+        int windowSum = 0;
+        int maxLen = -1;
+        int l=0;
+        for(int r=0;r<n;r++){
+            windowSum += nums[r];
 
-        HashMap<Integer,Integer> map = new HashMap<>(); // it will store prefixSum as key and indices as value 
-        map.put(0,-1); // important
-
-        int preSum = 0;
-        for(int i=0;i<n;i++){
-            preSum += nums[i];
-
-            if(map.containsKey(preSum - target)){
-                maxLen= Math.max(maxLen, i - map.get(preSum - target)); // i - map.get(preSum - target is formula for finding length of subarray having sum = target
+            while(l<=r && windowSum > target){
+                windowSum -= nums[l];
+                l++;
             }
-
-            map.put(preSum,i);
-
+            if(windowSum == target){
+                maxLen = Math.max(maxLen , r-l+1);
+            }
         }
 
-        if(maxLen == 0 && target != 0){ // ise ratt lo
-            return -1;
-        }
-    
-        int ops = n - maxLen;
+        if(maxLen == -1) return -1;
+        int ops = n-maxLen;
         return ops;
     }
 }
