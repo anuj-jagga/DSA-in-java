@@ -19,6 +19,7 @@ class Solution {
             }
         }
 
-        return idx<gas.length? idx : -1;
+        // return idx<gas.length? idx : -1;
+        return idx;
     }
 }
