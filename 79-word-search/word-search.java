@@ -15,9 +15,10 @@ class Solution {
 
     boolean backtrack(int idx,int row,int col,String s,char[][] board){
         int n = s.length();
+        if(idx == n) return true;
+        if(row<0 || row>=board.length || col < 0 || col >= board[0].length || board[row][col] == '$') return false;
+
         if(board[row][col] != s.charAt(idx)) return false;
-        if(idx == n - 1) return true;
-        // if(row<0 && row>=n && col < 0 && col >= n) return false;
 
         char temp = board[row][col];
         board[row][col] = '$';
@@ -26,11 +27,10 @@ class Solution {
             int nrow = row + dr[i]; 
             int ncol = col + dc[i];
             
-            if(nrow>=0 && nrow < board.length && ncol >= 0 && ncol < board[0].length && board[nrow][ncol]!='$'){
-                if(backtrack(idx+1,nrow,ncol,s,board)) return true;
-            }
+            if(backtrack(idx+1,nrow,ncol,s,board)) return true;
+            
         }
-        
+
         board[row][col] = temp;
         return false;
     }
