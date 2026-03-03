@@ -19,17 +19,19 @@ class Solution {
         if(idx == n - 1) return true;
         // if(row<0 && row>=n && col < 0 && col >= n) return false;
 
+        char temp = board[row][col];
+        board[row][col] = '$';
+
         for(int i=0;i<4;i++){
             int nrow = row + dr[i]; 
             int ncol = col + dc[i];
             
             if(nrow>=0 && nrow < board.length && ncol >= 0 && ncol < board[0].length && board[nrow][ncol]!='$'){
-                char temp = board[row][col];
-                board[row][col] = '$';
                 if(backtrack(idx+1,nrow,ncol,s,board)) return true;
-                board[row][col] = temp;
             }
         }
+        
+        board[row][col] = temp;
         return false;
     }
 }
