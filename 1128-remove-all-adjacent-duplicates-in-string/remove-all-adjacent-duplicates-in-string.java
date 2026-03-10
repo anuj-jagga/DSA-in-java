@@ -1,15 +1,13 @@
 class Solution {
     public String removeDuplicates(String s) {
-        HashMap<Character,Integer> map = new HashMap<>();
         StringBuilder sb = new StringBuilder();
+
         for(int i=0;i<s.length();i++){
-            char c = s.charAt(i);
-            if(!sb.isEmpty() && map.containsKey(c) && sb.charAt(sb.length()-1) == c){
+            if(sb.length()!=0 && s.charAt(i) == sb.charAt(sb.length()-1)){
                 sb.deleteCharAt(sb.length()-1);
-                continue;
+            }else{
+                sb.append(s.charAt(i));
             }
-            map.put(c,1);
-            sb.append(c);
         }
         return sb.toString();
     }
