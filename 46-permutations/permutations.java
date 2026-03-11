@@ -17,9 +17,8 @@ class Solution {
             swap(idx,i,nums);
             temp.add(nums[idx]);
             backtrack(idx+1,nums,temp);
-            swap(idx,i,nums);
             temp.remove(temp.size()-1);
-           
+            swap(idx,i,nums);
             
         }
     }
