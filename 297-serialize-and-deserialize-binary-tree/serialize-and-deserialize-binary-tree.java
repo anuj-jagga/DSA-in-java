@@ -40,7 +40,7 @@ public class Codec {
         q.add(root);
         int i = 1;
 
-        while(!q.isEmpty() && i<values.length){
+        while(!q.isEmpty() ){
             TreeNode parent = q.poll();
             if(! values[i].equals("null")){
                 parent.left = new TreeNode(Integer.parseInt(values[i]));
@@ -48,7 +48,7 @@ public class Codec {
             }
 
             i++;
-            if(i<values.length && ! values[i].equals("null")){
+            if( ! values[i].equals("null")){
                 parent.right = new TreeNode(Integer.parseInt(values[i]));
                 q.add(parent.right);
             }
