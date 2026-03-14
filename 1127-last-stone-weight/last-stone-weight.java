@@ -9,7 +9,6 @@ class Solution {
             int y = pq.poll();
             int x = pq.poll();
 
-            if(x==y) continue;
             if(y > x) pq.add(y-x);
         }
 
