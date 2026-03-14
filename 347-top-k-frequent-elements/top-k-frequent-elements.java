@@ -5,17 +5,17 @@ class Solution {
             map.put(num,map.getOrDefault(num,0)+1);
         }
         
-         PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[1] - b[1]);
+        PriorityQueue<Integer> pq = new PriorityQueue<>((a,b)-> map.get(a)-map.get(b));
         for(int key:map.keySet()){
-            pq.add(new int[]{key,map.get(key)});
-            if(pq.size() > k){
+            pq.add(key); // insert key as pq will sort acc to key's value in map
+            if(pq.size() > k){ // same concept as kth largest element in array(keep k largest in min heap)
                 pq.poll();
             }
         }
         int[] res = new int[k];
         int i = 0;
         while(!pq.isEmpty()){
-            res[i++] = pq.poll()[0];
+            res[i++] = pq.poll();
         }
         return res;
     }
