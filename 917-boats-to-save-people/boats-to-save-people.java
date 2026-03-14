@@ -5,20 +5,11 @@ class Solution {
         int cnt = 0;
 
         while(i <= j){
-            if(i==j){
-                cnt++;
-                break;
-            }
-            
             if(people[i] + people[j] <= limit){
                 i++;
-                j--;
-                cnt++;
             }
-            else{
-                j--;
-                cnt++;
-            }
+            j--;
+            cnt++;
         }
         return cnt;
     }
