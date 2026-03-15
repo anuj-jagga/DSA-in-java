@@ -16,11 +16,10 @@ class Solution {
         }
 
         int[][] res = new int[k][2];
+        int i = 0;
         
-        for(int i=0; i<k; i++){
-            int[] a = maxHeap.poll();
-            res[i][0] = a[0];
-            res[i][1] = a[1];
+        while(!maxHeap.isEmpty()){
+            res[i++] = maxHeap.poll();
         }
 
         return res;
