@@ -9,19 +9,12 @@ class Solution {
         for(int i=0;i<s.length();i++){
             char c = s.charAt(i);
             char d = t.charAt(i);
-            if(!map.containsKey(c)&& !map.containsValue(d)){
+            if(!map.containsKey(c) && !map.containsValue(d)){
                 map.put(c,d);
-            }    
+            } 
+            else if(!map.containsKey(c) || map.get(c)!=d) return false;
         }
 
-        for(int i=0;i<s.length();i++){
-            char c = s.charAt(i);
-            char d = t.charAt(i);
-
-            if(!map.containsKey(c) || !map.get(c).equals(d)){
-                return false;
-            }
-        }
         return true;
     }
 }
