@@ -15,14 +15,15 @@ class Solution {
             if(!st.isEmpty() && c == st.peek().ch){
                 Pair p = st.pop();
                 st.push(new Pair(c,p.cnt+1));
+                if(st.peek().cnt== k){
+                    st.pop();
+                }
             }
             else{
                 st.push(new Pair(c,1));
             } 
 
-            if(st.peek().cnt== k){
-                st.pop();
-            }
+
         }
 
         StringBuilder sb = new StringBuilder();
