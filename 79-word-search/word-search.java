@@ -14,24 +14,20 @@ class Solution {
     }
 
     boolean backtrack(int idx,int row,int col,String s,char[][] board){
-        int n = s.length();
-        if(idx == n) return true;
-        if(row<0 || row>=board.length || col < 0 || col >= board[0].length || board[row][col] == '$') return false;
-
         if(board[row][col] != s.charAt(idx)) return false;
-
+        if (idx == s.length() - 1) return true;
         char temp = board[row][col];
-        board[row][col] = '$';
+        board[row][col] = '$'; //marks as visited
 
         for(int i=0;i<4;i++){
             int nrow = row + dr[i]; 
             int ncol = col + dc[i];
-            
-            if(backtrack(idx+1,nrow,ncol,s,board)) return true;
-            
+            if(nrow >= 0 && nrow < board.length && ncol >= 0 && ncol < board[0].length && board[nrow][ncol] != '$'){
+                if(backtrack(idx+1,nrow,ncol,s,board)) return true;
+            }
         }
 
-        board[row][col] = temp;
+        board[row][col] = temp; //backtrack
         return false;
     }
 }
