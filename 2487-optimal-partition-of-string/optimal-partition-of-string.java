@@ -7,7 +7,7 @@ class Solution {
             char ch = s.charAt(i);
             if(set.contains(ch)){
                 cnt++;
-                set = new HashSet<>();
+                set.clear();
             }
             set.add(ch);
         }
