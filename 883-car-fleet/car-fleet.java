@@ -10,17 +10,15 @@ class Solution {
 
         Arrays.sort(arr,(a,b)-> Double.compare(a[0],b[0]));
 
-        int fleet = 0;
-        int i=n-1;
-        while(i>=0){
-            while(i!=0 && arr[i-1][1] <= arr[i][1]){
-                arr[i-1][1] = arr[i][1];
-                i--;
-            }
+        int fleets = 0;
+        double maxTime = 0;
 
-            fleet++;
-            i--;
+        for (int i = n - 1; i >= 0; i--) {
+            if (arr[i][1] > maxTime) {
+                fleets++;
+                maxTime = arr[i][1];
+            }
         }
-        return fleet;
+        return fleets;
     }
 }
