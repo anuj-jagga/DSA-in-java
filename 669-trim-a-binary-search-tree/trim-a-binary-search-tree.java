@@ -15,16 +15,22 @@
  */
 class Solution {
     public TreeNode trimBST(TreeNode root, int low, int high) {
-        if(root==null) return null;
-        if(root.val<low){
-            return trimBST(root.right,low,high);
+        if (root == null) return null;
+
+        // If root is smaller than low, left side is also smaller, so ignore left
+        if (root.val < low) {
+            return trimBST(root.right, low, high);
         }
-        if(root.val>high){
-            return trimBST(root.left,low,high);
+
+        // If root is greater than high, right side is also greater, so ignore right
+        if (root.val > high) {
+            return trimBST(root.left, low, high);
         }
-        
-        root.left=trimBST(root.left,low,high);
-        root.right=trimBST(root.right,low,high);
+
+        // Root is valid, trim both sides
+        root.left = trimBST(root.left, low, high);
+        root.right = trimBST(root.right, low, high);
+
         return root;
     }
 }
