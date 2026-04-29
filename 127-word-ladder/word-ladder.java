@@ -7,6 +7,8 @@ class Solution {
         }
         set.remove(beginWord);
 
+        if(! set.contains(endWord)) return 0;
+
         Queue<String> q = new LinkedList<>();
         q.add(beginWord);
 
