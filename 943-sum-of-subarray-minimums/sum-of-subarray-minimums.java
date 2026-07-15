@@ -1,60 +1,48 @@
 class Solution {
     public int sumSubarrayMins(int[] arr) {
-        int[] prevSmaller = prevSmall(arr);
-        int[] nextSmaller = nextSmall(arr);
-
+        int n = arr.length;
         int MOD = 1000000007;
-        long ans = 0; 
+        int[] prevSmall = prevSmaller(arr,n);
+        int[] nextSmall = nextSmaller(arr,n);
 
-        for(int i=0;i<arr.length;i++){
-            int left = i - prevSmaller[i];
-            int right = nextSmaller[i] - i;
-            long contribution = (left * 1L * right * arr[i]) % MOD;
-            ans = (ans + contribution) % MOD;
+        long total = 0;
+        for(int i=0; i<n;i++){
+            int left = i - prevSmall[i];
+            int right = nextSmall[i] - i;
+            long contribution = (left * 1L * arr[i] * right) % MOD;
+            total = (total + contribution) % MOD;
         }
 
-        return (int) ans;
+        return (int)total;
     }
 
-     int[] prevSmall(int[] arr){
-        int n = arr.length;
+    int[] prevSmaller(int[] arr, int n){
+        Stack<Integer> st = new Stack<>();
         int[] res = new int[n];
-        Deque<Integer> st = new ArrayDeque<>(); // stack
-        
-        for(int i=0;i<n;i++){
+        for(int i=0; i<n;i++){
+            while(!st.isEmpty() && arr[st.peek()] > arr[i]){
+                st.pop();
+            }
+
+            res[i] = st.isEmpty()?-1:st.peek();
+            st.push(i);
+        }
+
+        return res;
+    }
+
+    int[] nextSmaller(int[] arr, int n){
+        Stack<Integer> st = new Stack<>();
+        int[] res = new int[n];
+        for(int i=n-1; i>=0;i--){
             while(!st.isEmpty() && arr[st.peek()] >= arr[i]){
                 st.pop();
             }
 
-            if(!st.isEmpty()){
-                res[i] = st.peek();
-            }else{
-                res[i] = -1;
-            }
-
+            res[i] = st.isEmpty()? n:st.peek();
             st.push(i);
         }
-        return res;
-    }
 
-    int[] nextSmall(int[] arr){
-        int n = arr.length;
-        int[] res = new int[n];
-        Stack<Integer> st = new Stack<>();
-
-        for(int i=n-1;i>=0;i--){
-            while(!st.isEmpty() && arr[st.peek()] > arr[i]){ // imp note for this Q - just check for > not >=
-                st.pop();
-            }
-
-            if(!st.isEmpty()){
-                res[i] = st.peek();
-            }else{
-                res[i] = n;
-            }
-
-            st.push(i);
-        }
         return res;
     }
 }
